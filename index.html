@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drug Half-Life Calculator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f5f5f5;
+    }
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    h2 {
+        color: #333;
+        text-align: center;
+    }
+    form {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+    }
+    input[type="number"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+    select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+    button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 20px 30px;
+        cursor: pointer;
+        border-radius: 3px;
+        width: 100%;
+        margin-top: 10px;
+        font-size: 16px;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    th, td {
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    p {
+        color: #666;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Drug Half-Life Calculator</h2>
+    <form id="halfLifeForm">
+        <label for="drug">Select Drug (Half-Life):</label>
+        <select id="drug" name="drug">
+            <option value="acetaminophen">Acetaminophen (1-4 h)</option>
+            <option value="amikacin">Amikacin (2-3 hours)</option>
+            <option value="amiodarone">Amiodarone (26-107 days)</option>
+            <option value="ampicillin">Ampicillin (1 hour)</option>
+            <option value="apixaban">Apixaban (12 hours)</option>
+            <option value="aspirin">Aspirin (Acetylsalicylic Acid) (3-6 hours)</option>
+            <option value="atenolol">Atenolol (6-7 hours)</option>
+            <option value="atomoxetine">Atomoxetine (5 hours)</option>
+            <option value="azithromycin">Azithromycin (68 hours)</option>
+            <option value="aztreonam">Aztreonam (1-2 hours)</option>
+            <option value="baclofen">Baclofen (1-6 hours)</option>
+            <option value="budesonide">Budesonide (2-4 hours)</option>
+            <option value="buprenorphine">Buprenorphine (24-60 hours)</option>
+            <option value="carbamazepine">Carbamazepine (14-47 hours)</option>
+            <option value="carisoprodol">Carisoprodol (2.5 hours)</option>
+            <option value="cetirizine">Cetirizine (6-10 hours)</option>
+            <option value="cefepime">Cefepime (2-3 hours)</option>
+            <option value="cefotaxime">Cefotaxime (1-1.5 hours)</option>
+            <option value="cefixime">Cefixime (3-4 hours)</option>
+            <option value="ceftriaxone">Ceftriaxone (5-9 hours)</option>
+            <option value="citalopram">Citalopram (35 hours)</option>
+            <option value="clarithromycin">Clarithromycin (5-7 hours)</option>
+            <option value="clindamycin">Clindamycin (2-3 hours)</option>
+            <option value="clopidogrel">Clopidogrel (6 hours)</option>
+            <option value="clozapine">Clozapine (14 hours)</option>
+            <option value="cyclobenzaprine">Cyclobenzaprine (8-37 hours)</option>
+            <option value="cyclosporine">Cyclosporine (6-27 hours)</option>
+            <option value="dabigatran">Dabigatran (12-17 hours)</option>
+            <option value="dantrolene">Dantrolene (6-10 hours)</option>
+            <option value="dexamethasone">Dexamethasone (36-72 hours)</option>
+            <option value="diazepam">Diazepam (21-37 hours)</option>
+            <option value="digoxin">Digoxin (36-48 hours)</option>
+            <option value="diphenhydramine">Diphenhydramine (2.4-9.3 hours)</option>
+            <option value="doxycycline">Doxycycline (16-22 hours)</option>
+            <option value="drotaverine">Drotaverine (4 hours)</option>
+            <option value="enalapril">Enalapril (11 hours)</option>
+            <option value="erythromycin">Erythromycin (1.5-2 hours)</option>
+            <option value="escitalopram">Escitalopram (30 hours)</option>
+            <option value="esomeprazole">Esomeprazole (1-2 hours)</option>
+            <option value="eszopiclone">Eszopiclone (6 hours)</option>
+            <option value="everolimus">Everolimus (30 hours)</option>
+            <option value="fentanyl">Fentanyl (3-12 hours)</option>
+            <option value="fluconazole">Fluconazole (20-50 hours)</option>
+            <option value="fluoxetine">Fluoxetine (1-3 days)</option>
+            <option value="fluticasone">Fluticasone (7-16 hours)</option>
+            <option value="formoterol">Formoterol (10 hours)</option>
+            <option value="gabapentin">Gabapentin (5-7 hours)</option>
+            <option value="ganciclovir">Ganciclovir (3-6 hours)</option>
+            <option value="gentamicin">Gentamicin (2-3 hours)</option>
+            <option value="haloperidol">Haloperidol (14-41 hours)</option>
+            <option value="hydrochlorothiazide">Hydrochlorothiazide (6-15 hours)</option>
+            <option value="hydrocortisone">Hydrocortisone (8-12 hours)</option>
+            <option value="hydroxyzine">Hydroxyzine (20-25 hours)</option>
+            <option value="ibuprofen">Ibuprofen (2-4 hours)</option>
+            <option value="ipratropium">Ipratropium (1.6 hours)</option>
+            <option value="lamotrigine">Lamotrigine (24-35 hours)</option>
+            <option value="levothyroxine">Levothyroxine (7 days)</option>
+            <option value="levetiracetam">Levetiracetam (6-8 hours)</option>
+            <option value="linezolid">Linezolid (4-6 hours)</option>
+            <option value="lisinopril">Lisinopril (12 hours)</option>
+            <option value="lorazepam">Lorazepam (10-20 hours)</option>
+            <option value="lurasidone">Lurasidone (18 hours)</option>
+            <option value="meloxicam">Meloxicam (20 hours)</option>
+            <option value="memantine">Memantine (60-100 hours)</option>
+            <option value="metformin">Metformin (4-8 hours)</option>
+            <option value="methadone">Methadone (8-59 hours)</option>
+            <option value="methotrexate">Methotrexate (3-10 hours)</option>
+            <option value="metoclopramide">Metoclopramide (5-6 hours)</option>
+            <option value="metoprolol">Metoprolol (3-7 hours)</option>
+            <option value="methylprednisolone">Methylprednisolone (18-36 hours)</option>
+            <option value="midazolam">Midazolam (1.8-6 hours)</option>
+            <option value="minocycline">Minocycline (11-22 hours)</option>
+            <option value="montelukast">Montelukast (2.7-5.5 hours)</option>
+            <option value="morphine">Morphine (1-7 hours)</option>
+            <option value="mycophenolate">Mycophenolate (12 hours)</option>
+            <option value="naloxone">Naloxone (30-81 minutes)</option>
+            <option value="naproxen">Naproxen (12-17 hours)</option>
+            <option value="nifedipine">Nifedipine (2 hours)</option>
+            <option value="nitrofurantoin">Nitrofurantoin (1-2 hours)</option>
+            <option value="olanzapine">Olanzapine (21-54 hours)</option>
+            <option value="omeprazole">Omeprazole (1 hour)</option>
+            <option value="oxycodone">Oxycodone (3-5 hours)</option>
+            <option value="paroxetine">Paroxetine (21 hours)</option>
+            <option value="penicillin">Penicillin (0.5-1 hour)</option>
+            <option value="phenobarbital">Phenobarbital (81-117 hours)</option>
+            <option value="phenytoin">Phenytoin (22 hours)</option>
+            <option value="pregabalin">Pregabalin (6.3 hours)</option>
+            <option value="propranolol">Propranolol (2-6 hours)</option>
+            <option value="quetiapine">Quetiapine (6 hours)</option>
+            <option value="ranitidine">Ranitidine (2-3 hours)</option>
+            <option value="remdesivir">Remdesivir (1 hour)</option>
+            <option value="ribavirin">Ribavirin (1.5-5 hours)</option>
+            <option value="rivaroxaban">Rivaroxaban (5-9 hours)</option>
+            <option value="ropinirole">Ropinirole (6 hours)</option>
+            <option value="rosuvastatin">Rosuvastatin (19 hours)</option>
+            <option value="sertraline">Sertraline (26 hours)</option>
+            <option value="simvastatin">Simvastatin (2-5 hours)</option>
+            <option value="sirolimus">Sirolimus (50 hours)</option>
+            <option value="tacrolimus">Tacrolimus (11-40 hours)</option>
+            <option value="tadalafil">Tadalafil (17.5 hours)</option>
+            <option value="tamoxifen">Tamoxifen (5-7 days)</option>
+            <option value="tamsulosin">Tamsulosin (10 hours)</option>
+            <option value="telmisartan">Telmisartan (20 hours)</option>
+            <option value="temazepam">Temazepam (10-20 hours)</option>
+            <option value="tenofovir">Tenofovir (12-14 hours)</option>
+            <option value="terbinafine">Terbinafine (36 hours)</option>
+            <option value="theophylline">Theophylline (4-8 hours)</option>
+            <option value="ticagrelor">Ticagrelor (7 hours)</option>
+            <option value="tizanidine">Tizanidine (2.5 hours)</option>
+            <option value="topiramate">Topiramate (21 hours)</option>
+            <option value="tramadol">Tramadol (5-6 hours)</option>
+            <option value="trazodone">Trazodone (7 hours)</option>
+            <option value="valproic acid">Valproic Acid (9-16 hours)</option>
+            <option value="vancomycin">Vancomycin (4-6 hours)</option>
+            <option value="venlafaxine">Venlafaxine (5 hours)</option>
+            <option value="vildagliptin">Vildagliptin (2 hours)</option>
+            <option value="warfarin">Warfarin (20-60 hours)</option>
+            <option value="zolpidem">Zolpidem (2.5 hours)</option>
+            <!-- Add more options here -->
+        </select>
+        <label for="dosage">Dosage (mg):</label>
+        <input type="number" id="dosage" name="dosage" step="0.01" required>
+        <button type="button" onclick="calculateHalfLife()">Calculate</button>
+    </form>
+
+    <p>The results below show the dosage and concentration of the selected drug over multiple half-life cycles.</p>
+    <div id="resultTable"></div>
+</div>
+
+<script>
+function calculateHalfLife() {
+    var drug = document.getElementById('drug').value;
+    var dosage = parseFloat(document.getElementById('dosage').value);
+    var halfLife;
+
+    switch (drug) {
+        case "acetaminophen":
+            halfLife = [1, 4];
+            break;
+        case "amikacin":
+            halfLife = [2, 3];
+            break;
+        case "amiodarone":
+            halfLife = [26 * 24, 107 * 24]; // Convert days to hours
+            break;
+        case "ampicillin":
+            halfLife = [1];
+            break;
+        case "apixaban":
+            halfLife = [12];
+            break;
+        case "aspirin":
+            halfLife = [3, 6];
+            break;
+        case "atenolol":
+            halfLife = [6, 7];
+            break;
+        case "atomoxetine":
+            halfLife = [5];
+            break;
+        case "azithromycin":
+            halfLife = [68];
+            break;
+        case "aztreonam":
+            halfLife = [1, 2];
+            break;
+        case "baclofen":
+            halfLife = [1, 6];
+            break;
+        case "budesonide":
+            halfLife = [2, 4];
+            break;
+        case "buprenorphine":
+            halfLife = [24, 60];
+            break;
+        case "carbamazepine":
+            halfLife = [14, 47];
+            break;
+        case "carisoprodol":
+            halfLife = [2.5];
+            break;
+        case "cetirizine":
+            halfLife = [6, 10];
+            break;
+        case "cefepime":
+            halfLife = [2, 3];
+            break;
+        case "cefotaxime":
+            halfLife = [1, 1.5];
+            break;
+        case "cefixime":
+            halfLife = [3, 4];
+            break;
+        case "ceftriaxone":
+            halfLife = [5, 9];
+            break;
+        case "citalopram":
+            halfLife = [35];
+            break;
+        case "clarithromycin":
+            halfLife = [5, 7];
+            break;
+        case "clindamycin":
+            halfLife = [2, 3];
+            break;
+        case "clopidogrel":
+            halfLife = [6];
+            break;
+        case "clozapine":
+            halfLife = [14];
+            break;
+        case "cyclobenzaprine":
+            halfLife = [8, 37];
+            break;
+        case "cyclosporine":
+            halfLife = [6, 27];
+            break;
+        case "dabigatran":
+            halfLife = [12, 17];
+            break;
+        case "dantrolene":
+            halfLife = [6, 10];
+            break;
+        case "dexamethasone":
+            halfLife = [36, 72];
+            break;
+        case "diazepam":
+            halfLife = [21, 37];
+            break;
+        case "digoxin":
+            halfLife = [36, 48];
+            break;
+        case "diphenhydramine":
+            halfLife = [2.4, 9.3];
+            break;
+        case "doxycycline":
+            halfLife = [16, 22];
+            break;
+        case "drotaverine":
+            halfLife = [4];
+            break;
+        case "enalapril":
+            halfLife = [11];
+            break;
+        case "erythromycin":
+            halfLife = [1.5, 2];
+            break;
+        case "escitalopram":
+            halfLife = [30];
+            break;
+        case "esomeprazole":
+            halfLife = [1, 2];
+            break;
+        case "eszopiclone":
+            halfLife = [6];
+            break;
+        case "everolimus":
+            halfLife = [30];
+            break;
+        case "fentanyl":
+            halfLife = [3, 12];
+            break;
+        case "fluconazole":
+            halfLife = [20, 50];
+            break;
+        case "fluoxetine":
+            halfLife = [24, 72]; // Convert 1-3 days to hours
+            break;
+        case "fluticasone":
+            halfLife = [7, 16];
+            break;
+        case "formoterol":
+            halfLife = [10];
+            break;
+        case "gabapentin":
+            halfLife = [5, 7];
+            break;
+        case "ganciclovir":
+            halfLife = [3, 6];
+            break;
+        case "gentamicin":
+            halfLife = [2, 3];
+            break;
+        case "haloperidol":
+            halfLife = [14, 41];
+            break;
+        case "hydrochlorothiazide":
+            halfLife = [6, 15];
+            break;
+        case "hydrocortisone":
+            halfLife = [8, 12];
+            break;
+        case "hydroxyzine":
+            halfLife = [20, 25];
+            break;
+        case "ibuprofen":
+            halfLife = [2, 4];
+            break;
+        case "ipratropium":
+            halfLife = [1.6];
+            break;
+        case "lamotrigine":
+            halfLife = [24, 35];
+            break;
+        case "levothyroxine":
+            halfLife = [7 * 24]; // Convert 7 days to hours
+            break;
+        case "levetiracetam":
+            halfLife = [6, 8];
+            break;
+        case "linezolid":
+            halfLife = [4, 6];
+            break;
+        case "lisinopril":
+            halfLife = [12];
+            break;
+        case "lorazepam":
+            halfLife = [10, 20];
+            break;
+        case "lurasidone":
+            halfLife = [18];
+            break;
+        case "meloxicam":
+            halfLife = [20];
+            break;
+        case "memantine":
+            halfLife = [60, 100];
+            break;
+        case "metformin":
+            halfLife = [4, 8];
+            break;
+        case "methadone":
+            halfLife = [8, 59];
+            break;
+        case "methotrexate":
+            halfLife = [3, 10];
+            break;
+        case "metoclopramide":
+            halfLife = [5, 6];
+            break;
+        case "metoprolol":
+            halfLife = [3, 7];
+            break;
+        case "methylprednisolone":
+            halfLife = [18, 36];
+            break;
+        case "midazolam":
+            halfLife = [1.8, 6];
+            break;
+        case "minocycline":
+            halfLife = [11, 22];
+            break;
+        case "montelukast":
+            halfLife = [2.7, 5.5];
+            break;
+        case "morphine":
+            halfLife = [1, 7];
+            break;
+        case "mycophenolate":
+            halfLife = [12];
+            break;
+        case "naloxone":
+            halfLife = [30, 81];
+            break;
+        case "naproxen":
+            halfLife = [12, 17];
+            break;
+        case "nifedipine":
+            halfLife = [2];
+            break;
+        case "nitrofurantoin":
+            halfLife = [1, 2];
+            break;
+        case "olanzapine":
+            halfLife = [21, 54];
+            break;
+        case "omeprazole":
+            halfLife = [1];
+            break;
+        case "oxycodone":
+            halfLife = [3, 5];
+            break;
+        case "paroxetine":
+            halfLife = [21];
+            break;
+        case "penicillin":
+            halfLife = [0.5, 1];
+            break;
+        case "phenobarbital":
+            halfLife = [81, 117];
+            break;
+        case "phenytoin":
+            halfLife = [22];
+            break;
+        case "pregabalin":
+            halfLife = [6.3];
+            break;
+        case "propranolol":
+            halfLife = [2, 6];
+            break;
+        case "quetiapine":
+            halfLife = [6];
+            break;
+        case "ranitidine":
+            halfLife = [2, 3];
+            break;
+        case "remdesivir":
+            halfLife = [1];
+            break;
+        case "ribavirin":
+            halfLife = [1.5, 5];
+            break;
+        case "rivaroxaban":
+            halfLife = [5, 9];
+            break;
+        case "ropinirole":
+            halfLife = [6];
+            break;
+        case "rosuvastatin":
+            halfLife = [19];
+            break;
+        case "sertraline":
+            halfLife = [26];
+            break;
+        case "simvastatin":
+            halfLife = [2, 5];
+            break;
+        case "sirolimus":
+            halfLife = [50];
+            break;
+        case "tacrolimus":
+            halfLife = [11, 40];
+            break;
+        case "tadalafil":
+            halfLife = [17.5];
+            break;
+        case "tamoxifen":
+            halfLife = [5 * 24]; // Convert 5 days to hours
+            break;
+        case "tamsulosin":
+            halfLife = [10];
+            break;
+        case "telmisartan":
+            halfLife = [20];
+            break;
+        case "temazepam":
+            halfLife = [10, 20];
+            break;
+        case "tenofovir":
+            halfLife = [12, 14];
+            break;
+        case "terbinafine":
+            halfLife = [36];
+            break;
+        case "theophylline":
+            halfLife = [4, 8];
+            break;
+        case "ticagrelor":
+            halfLife = [7];
+            break;
+        case "tizanidine":
+            halfLife = [2.5];
+            break;
+        case "topiramate":
+            halfLife = [21];
+            break;
+        case "tramadol":
+            halfLife = [5, 6];
+            break;
+        case "trazodone":
+            halfLife = [7];
+            break;
+        case "valproic acid":
+            halfLife = [9, 16];
+            break;
+        case "vancomycin":
+            halfLife = [4, 6];
+            break;
+        case "venlafaxine":
+            halfLife = [5];
+            break;
+        case "vildagliptin":
+            halfLife = [2];
+            break;
+        case "warfarin":
+            halfLife = [20, 60];
+            break;
+        case "zolpidem":
+            halfLife = [2.5];
+            break;
+        // Add more cases here
+        default:
+            halfLife = [0];
+    }
+
+    var results = [];
+    var time = 0;
+    for (var i = 1; i <= 6; i++) {
+        time += halfLife[Math.floor(Math.random() * halfLife.length)];
+        var dosageLeft = dosage * Math.pow(0.5, i);
+        var concentration = (dosageLeft / dosage) * 100;
+        results.push([i, time, dosageLeft.toFixed(2), concentration.toFixed(2)]);
+    }
+
+    var table = '<table>';
+    table += '<tr><th>Half-Life Cycle</th><th>Time (hours)</th><th>Dosage Left (mg)</th><th>Concentration (%)</th></tr>';
+    for (var j = 0; j < results.length; j++) {
+        table += '<tr>';
+        table += '<td>' + results[j][0] + '</td>';
+        table += '<td>' + results[j][1] + '</td>';
+        table += '<td>' + results[j][2] + '</td>';
+        table += '<td>' + results[j][3] + '</td>';
+        table += '</tr>';
+    }
+    table += '</table>';
+
+    document.getElementById('resultTable').innerHTML = table;
+}
+</script>
+
+</body>
+</html>
